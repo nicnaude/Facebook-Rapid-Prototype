@@ -10,10 +10,22 @@ import UIKit
 
 class RequestsViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var requestsImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        scrollView.contentSize = CGSize(width: 320, height: requestsImageView.image!.size.height)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        scrollView.contentInset.top = 0
+        scrollView.contentInset.bottom = 50
+        scrollView.scrollIndicatorInsets.top = 0
+        scrollView.scrollIndicatorInsets.bottom = 50
     }
 
     override func didReceiveMemoryWarning() {

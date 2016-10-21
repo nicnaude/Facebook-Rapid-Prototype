@@ -9,27 +9,43 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    var originalButtonCenter: CGPoint!
+    var offsetButtonCenter: CGPoint!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    var originalActivityCenter: CGPoint!
+    var offsetOriginalActivityCenter: CGPoint!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var originalFacebookLogoCenter: CGPoint!
+    var offsetFacebookLogoCenter: CGPoint!
+    @IBOutlet weak var facebookLogoImageView: UIImageView!
+    
+    var originalLoginFielsViewCenter: CGPoint!
+    var offsetLoginFielsViewCenter: CGPoint!
+    @IBOutlet weak var loginFieldsView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        originalButtonCenter = loginButton.center
+        offsetButtonCenter = CGPoint(x: originalButtonCenter.x, y: originalButtonCenter.y - 150)
+        originalActivityCenter = activityIndicator.center
+        offsetOriginalActivityCenter = CGPoint(x: originalActivityCenter.x, y: originalActivityCenter.y - 150)
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) {(Notification) in
+            print("Keyboard was  shown?")
+            self.loginButton.center = self.offsetButtonCenter
+        }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) {(Notification) in
+            print("Keyboard was  shown?")
+            self.loginButton.center = self.originalButtonCenter
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func didTapMainView(_ sender: AnyObject) {
+        view.endEditing(true)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
