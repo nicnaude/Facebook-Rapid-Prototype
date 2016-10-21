@@ -34,6 +34,14 @@ class LoginViewController: UIViewController {
         originalActivityCenter = activityIndicator.center
         offsetOriginalActivityCenter = CGPoint(x: originalActivityCenter.x, y: originalActivityCenter.y - 150)
         
+        originalFacebookLogoCenter = facebookLogoImageView.center
+        offsetFacebookLogoCenter = CGPoint(x: originalFacebookLogoCenter.x , y: originalFacebookLogoCenter.y - 40)
+        
+        
+        
+        
+        
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) {(Notification) in
             print("Keyboard was  shown?")
             self.loginButton.center = self.offsetButtonCenter
